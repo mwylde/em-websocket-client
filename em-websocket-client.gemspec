@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "em-websocket-client.gemspec",
     "lib/em-websocket-client.rb"
   ]
   s.homepage = %q{http://github.com/mwylde/em-websocket-client}
