@@ -2,7 +2,7 @@
 
 This gem implements a simple websocket client inside EventMachine.
 This might be useful for testing web socket servers or consuming
-WebSocket APIs. In particular, it supports the
+WebSocket APIs. In particular it supports the
 [hixie-76](http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76)
 version of the protocol, which is also implemented in Chrome and
 Safari. At this time, the wss (WebSocket over SSL) protocol is not
@@ -41,4 +41,5 @@ end
 # prints out:
 # <Hello!>
 # <done>
-# <gone>```
+# gone
+```
