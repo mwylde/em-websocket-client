@@ -13,15 +13,13 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "em-websocket-client"
   gem.homepage = "http://github.com/mwylde/em-websocket-client"
   gem.license = "MIT"
-  gem.summary = %Q{A WebSocket client implementation for EventMachine}
-  gem.description = %Q{EventMachine WebSocket Client}
-  gem.email = "micah@twilio.com"
+  gem.summary = %Q{EventMachine WebSocket Client}
+  gem.description = %Q{A WebSocket client implementation for EventMachine}
+  gem.email = "mwylde@wesleyan.edu"
   gem.authors = ["Micah Wylde"]
-  # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 

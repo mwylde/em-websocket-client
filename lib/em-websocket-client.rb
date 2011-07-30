@@ -1,19 +1,17 @@
-require 'eventmachine'
 require 'uri'
 require 'libwebsocket'
 
 module EventMachine
   class WebSocketClient < Connection
+    include Deferrable
+
     attr_accessor :url
 
-    def self.connect uri, &cb
+    def self.connect uri
       p_uri = URI.parse(uri)
-      puts p_uri.host
-      conn = EM.connect(p_uri.host, 80, self) do |c|
+      conn = EM.connect(p_uri.host, p_uri.port || 80, self) do |c|
         c.url = uri
-        c.callback &cb
       end
-      conn
     end
 
     def post_init
@@ -26,16 +24,17 @@ module EventMachine
       send_data @hs.to_s
     end
 
-    def callback &cb; @callback = cb; end
     def stream &cb; @stream = cb; end
     def disconnect &cb; @disconnect = cb; end
     
     def receive_data data
       if !@handshaked
-        @hs.parse data
+        result = @hs.parse data
+        fail @hs.error unless result
+        
         if @hs.done?
           @handshaked = true
-          @callback.call if @callback
+          succeed
         end
       else
         @frame.append(data)
