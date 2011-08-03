@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{em-websocket-client}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Micah Wylde"]
-  s.date = %q{2011-07-30}
+  s.date = %q{2011-08-02}
   s.description = %q{A WebSocket client implementation for EventMachine}
   s.email = %q{mwylde@wesleyan.edu}
   s.extra_rdoc_files = [
