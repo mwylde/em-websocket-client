@@ -1,6 +1,34 @@
 require 'uri'
 require 'libwebsocket'
 
+# Monkey patch libwebsocket to support parameters in URLs
+module LibWebSocket
+  class URL
+    def parse(string)
+      return nil unless string.is_a?(String)
+
+      uri = Addressable::URI.parse(string)
+
+      scheme = uri.scheme
+      return nil unless scheme
+
+      self.secure = true if scheme.match(/ss\Z/m)
+
+      host = uri.host
+      host = '/' unless host && host != ''
+      self.host = host
+      self.port = uri.port.to_s if uri.port
+
+      request_uri = uri.path
+      request_uri = '/' unless request_uri && request_uri != ''
+      request_uri += "?" + uri.query if uri.query
+      self.resource_name = request_uri
+
+      return self
+    end
+  end
+end
+
 module EventMachine
   class WebSocketClient < Connection
     include Deferrable
