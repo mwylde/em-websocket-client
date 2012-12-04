@@ -42,7 +42,7 @@ module EventMachine
       end
     end
 
-    def send_msg(s, args)
+    def send_msg(s, args={})
       type = args[:type] || :text
       frame = ::WebSocket::Frame::Outgoing::Client.new(:data => s, :type => type, :version => @hs.version)
       send_data frame.to_s
