@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "eventmachine"
-gem "libwebsocket"
+gem "websocket"
 
 group :development do
   gem "rspec", "~> 2.3.0"
