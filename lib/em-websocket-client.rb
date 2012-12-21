@@ -1,3 +1,4 @@
+require 'eventmachine'
 require 'uri'
 require 'websocket'
 
