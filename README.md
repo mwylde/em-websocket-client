@@ -3,7 +3,7 @@
 This gem implements a simple websocket client inside EventMachine.
 This might be useful for testing web socket servers or consuming
 WebSocket APIs. In particular it supports the
-[hixie-76](http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76)
+[RFC6455](http://tools.ietf.org/html/rfc6455)
 version of the protocol, which is also implemented in Chrome and
 Safari. At this time, the wss (WebSocket over SSL) protocol is not
 supported.
@@ -24,10 +24,10 @@ EM.run do
   conn.errback do |e|
     puts "Got error: #{e}"
   end
-  
+
   conn.stream do |msg|
     puts "<#{msg}>"
-    if msg == "done"
+    if msg.data == "done"
       conn.close_connection
     end
   end
