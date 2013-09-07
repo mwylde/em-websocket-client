@@ -21,9 +21,9 @@ module EventMachine
     end
 
     def connection_completed
+      @connect.yield
       @hs = ::WebSocket::Handshake::Client.new(:url => @url)
       send_data @hs.to_s
-      @connect.yield
     end
 
     def stream &cb; @stream = cb; end
