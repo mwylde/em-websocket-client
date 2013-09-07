@@ -21,7 +21,7 @@ module EventMachine
     end
 
     def connection_completed
-      @connect.yield
+      @connect.yield if @connect
       @hs = ::WebSocket::Handshake::Client.new(:url => @url)
       send_data @hs.to_s
     end
