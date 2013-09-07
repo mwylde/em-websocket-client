@@ -21,11 +21,13 @@ module EventMachine
     end
 
     def connection_completed
+      @connect.yield if @connect
       @hs = ::WebSocket::Handshake::Client.new(:url => @url)
       send_data @hs.to_s
     end
 
     def stream &cb; @stream = cb; end
+    def connected &cb; @connect = cb; end
     def disconnect &cb; @disconnect = cb; end
 
     def receive_data data
