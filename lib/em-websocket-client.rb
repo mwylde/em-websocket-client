@@ -7,11 +7,15 @@ module EventMachine
     include Deferrable
 
     attr_accessor :url
+    attr_accessor :protocol_version
+    attr_accessor :origin
 
-    def self.connect uri
+    def self.connect(uri, opts={})
       p_uri = URI.parse(uri)
       conn = EM.connect(p_uri.host, p_uri.port || 80, self) do |c|
         c.url = uri
+        c.protocol_version = opts[:version]
+        c.origin = opts[:origin]
       end
     end
 
@@ -22,7 +26,9 @@ module EventMachine
 
     def connection_completed
       @connect.yield if @connect
-      @hs = ::WebSocket::Handshake::Client.new(:url => @url)
+      @hs = ::WebSocket::Handshake::Client.new(:url     => @url,
+                                               :origin  => @origin,
+                                               :version => @protocol_version)
       send_data @hs.to_s
     end
 
