@@ -43,6 +43,8 @@ module EventMachine
           @handshaked = true
           succeed
         end
+
+        receive_data(@hs.leftovers) if @hs.leftovers
       else
         @frame << data
         while msg = @frame.next
